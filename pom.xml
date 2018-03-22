@@ -9,7 +9,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
 		<bindgen.version>4.0.0</bindgen.version>
+		<bindgen-bindings-java.version>1.0.0</bindgen-bindings-java.version>
 		<slf4j.version>1.6.1</slf4j.version>
 		<guava.version>19.0</guava.version>
 		
@@ -29,7 +31,7 @@
 		<minimal.jdk.version>1.8</minimal.jdk.version>
 		<minimal.maven.version>3.3</minimal.maven.version>
 	</properties>
-
+	
 	<!-- Toolchain configuration so that bindgen can be generated either for jdk8 or jdk9 -->
 	<!-- TODO jdk9 is untested for now -->
 	<profiles>
@@ -105,6 +107,11 @@
 					<artifactId>slf4j-api</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.iglooproject.components</groupId>
+			<artifactId>bindgen-bindings-java</artifactId>
+			<version>${bindgen-bindings-java.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
