@@ -3,35 +3,35 @@
 	<groupId>org.iglooproject.components</groupId>
 	<artifactId>bindgen-java</artifactId>
 	<version>1.1-SNAPSHOT</version>
-	
+
 	<name>igloo java.* bindings</name>
 	<description>Pre-generated bindings for java classes</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
-		<bindgen.version>4.0.0</bindgen.version>
-		<bindgen-bindings-java.version>1.0.0</bindgen-bindings-java.version>
-		<slf4j.version>1.7.25</slf4j.version>
-		<guava.version>26.0-jre</guava.version>
-		
-		<maven-toolchains-plugin.version>1.1</maven-toolchains-plugin.version>
-		<maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
-		<maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
+
+		<bindgen.version>4.1-SNAPSHOT</bindgen.version>
+		<bindgen-bindings-java.version>1.2-SNAPSHOT</bindgen-bindings-java.version>
+		<slf4j.version>1.7.30</slf4j.version>
+		<guava.version>29.0-jre</guava.version>
+
+		<maven-toolchains-plugin.version>3.0.0</maven-toolchains-plugin.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		<maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
 		<maven-jgitflow-plugin.version>1.0-m5.1</maven-jgitflow-plugin.version>
-		<animal-sniffer-maven-plugin.version>1.15</animal-sniffer-maven-plugin.version>
-		<maven.deploy.version>2.8.2</maven.deploy.version>
-		<maven.source.version>3.0.1</maven.source.version>
-		<maven.javadoc.version>3.0.0</maven.javadoc.version>
-		
-		<jdk.signature.groupId>org.codehaus.mojo.signature</jdk.signature.groupId>
-		<jdk.signature.artifactId>java18</jdk.signature.artifactId>
-		<jdk.signature.version>1.0</jdk.signature.version>
-		<jdk.version>1.8</jdk.version>
-		<minimal.jdk.version>1.8</minimal.jdk.version>
+		<animal-sniffer-maven-plugin.version>1.19</animal-sniffer-maven-plugin.version>
+		<maven.deploy.version>3.0.0-M1</maven.deploy.version>
+		<maven.source.version>3.2.1</maven.source.version>
+		<maven.javadoc.version>3.2.0</maven.javadoc.version>
+
+<!-- 		<jdk.signature.groupId>org.codehaus.mojo.signature</jdk.signature.groupId> -->
+<!-- 		<jdk.signature.artifactId>java18</jdk.signature.artifactId> -->
+<!-- 		<jdk.signature.version>1.0</jdk.signature.version> -->
+		<jdk.version>11</jdk.version>
+		<minimal.jdk.version>11</minimal.jdk.version>
 		<minimal.maven.version>3.3</minimal.maven.version>
 	</properties>
-	
+
 	<!-- Toolchain configuration so that bindgen can be generated either for jdk8 or jdk9 -->
 	<!-- TODO jdk9 is untested for now -->
 	<profiles>
@@ -92,6 +92,28 @@
 					</plugin>
 				</plugins>
 			</build>
+		</profile><profile>
+			<id>jdk11</id>
+			<activation>
+				<property>
+					<name>jdk11</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-toolchains-plugin</artifactId>
+						<configuration>
+							<toolchains>
+								<jdk>
+									<version>11</version>
+								</jdk>
+							</toolchains>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 
@@ -128,7 +150,7 @@
 	<build>
 		<plugins>
 			<!-- processor and compiler
-			
+
 			maven-compiler-plugin must be used in place of maven-processor-plugin because it supports toolchain
 			-->
 			<plugin>
@@ -200,41 +222,41 @@
 					</executions>
 				</plugin>
 				<!-- Enforce code compatibility with the target JRE, even when building with a newer JDK. This ensures
-					that none of the newer classes or methods that were not yet defined in the target JRE are referenced 
+					that none of the newer classes or methods that were not yet defined in the target JRE are referenced
 					in this project. See https://maven.apache.org/guides/mini/guide-building-jdk14-on-jdk15.html Please
-					be aware that code generation tools may be affected by the JDK used to compile, and thus may trigger 
+					be aware that code generation tools may be affected by the JDK used to compile, and thus may trigger
 					a failure (because they automatically referenced newer classes or methods). In this case, the only
 					way to make things work is to use the proper JDK. -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>animal-sniffer-maven-plugin</artifactId>
-					<version>${animal-sniffer-maven-plugin.version}</version>
-					<!-- check generated bindings jre api calls -->
-					<executions>
-						<execution>
-							<id>check-java-version</id>
-							<phase>compile</phase>
-							<goals>
-								<goal>check</goal>
-							</goals>
-							<configuration>
-								<signature>
-									<groupId>${jdk.signature.groupId}</groupId>
-									<artifactId>${jdk.signature.artifactId}</artifactId>
-									<version>${jdk.signature.version}</version>
-								</signature>
-							</configuration>
-						</execution>
-					</executions>
-					<dependencies>
-						<dependency>
-							<groupId>${jdk.signature.groupId}</groupId>
-							<artifactId>${jdk.signature.artifactId}</artifactId>
-							<version>${jdk.signature.version}</version>
-							<type>signature</type>
-						</dependency>
-					</dependencies>
-				</plugin>
+<!-- 				<plugin> -->
+<!-- 					<groupId>org.codehaus.mojo</groupId> -->
+<!-- 					<artifactId>animal-sniffer-maven-plugin</artifactId> -->
+<!-- 					<version>${animal-sniffer-maven-plugin.version}</version> -->
+<!-- 					check generated bindings jre api calls -->
+<!-- 					<executions> -->
+<!-- 						<execution> -->
+<!-- 							<id>check-java-version</id> -->
+<!-- 							<phase>compile</phase> -->
+<!-- 							<goals> -->
+<!-- 								<goal>check</goal> -->
+<!-- 							</goals> -->
+<!-- 							<configuration> -->
+<!-- 								<signature> -->
+<!-- 									<groupId>${jdk.signature.groupId}</groupId> -->
+<!-- 									<artifactId>${jdk.signature.artifactId}</artifactId> -->
+<!-- 									<version>${jdk.signature.version}</version> -->
+<!-- 								</signature> -->
+<!-- 							</configuration> -->
+<!-- 						</execution> -->
+<!-- 					</executions> -->
+<!-- 					<dependencies> -->
+<!-- 						<dependency> -->
+<!-- 							<groupId>${jdk.signature.groupId}</groupId> -->
+<!-- 							<artifactId>${jdk.signature.artifactId}</artifactId> -->
+<!-- 							<version>${jdk.signature.version}</version> -->
+<!-- 							<type>signature</type> -->
+<!-- 						</dependency> -->
+<!-- 					</dependencies> -->
+<!-- 				</plugin> -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
@@ -290,7 +312,7 @@
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>${maven.javadoc.version}</version>
 				</plugin>
-				
+
 				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
