@@ -10,19 +10,19 @@ maven-build:
   stage: build
   environment: staging
   script:
-    - "mvn -DskipTests clean compile"
+    - "mvn -U -DskipTests clean compile"
 
 maven-test:
   stage: test
   environment: staging
   script:
-    - "mvn test"
+    - "mvn -U test"
 
 maven-deploy:
   stage: deploy
   environment: staging
   script:
-    - "mvn deploy -DskipTests -DperformRelease"
+    - "mvn -U deploy -DskipTests -DperformRelease"
   only:
     - /^master$/
     - /^dev$/
