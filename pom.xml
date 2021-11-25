@@ -10,8 +10,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<bindgen.version>5.0-SNAPSHOT</bindgen.version>
-		<bindgen-bindings-java.version>2.0-SNAPSHOT</bindgen-bindings-java.version>
+		<bindgen.version>5.0.0</bindgen.version>
+		<bindgen-bindings-java.version>2.0.0</bindgen-bindings-java.version>
 		<slf4j.version>1.7.32</slf4j.version>
 		<guava.version>30.1.1-jre</guava.version>
 
