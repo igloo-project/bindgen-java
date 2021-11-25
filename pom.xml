@@ -27,6 +27,7 @@
 		<maven.resources.version>3.2.0</maven.resources.version>
 		<maven.site.version>3.9.1</maven.site.version>
 		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
+		<jsch.version>0.1.55</jsch.version>
 
 		<jdk.version>11</jdk.version>
 		<minimal.jdk.version>11</minimal.jdk.version>
@@ -185,6 +186,13 @@
 							<versionTagPrefix>v</versionTagPrefix>
 						</flowInitContext>
 					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.jcraft</groupId>
+							<artifactId>jsch</artifactId>
+							<version>${jsch.version}</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
