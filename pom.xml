@@ -29,7 +29,7 @@
 		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
 		<jsch.version>0.1.55</jsch.version>
 
-		<jdk.version>11</jdk.version>
+		<jdk.version>17</jdk.version>
 		<minimal.jdk.version>11</minimal.jdk.version>
 		<minimal.maven.version>3.3</minimal.maven.version>
 	</properties>
