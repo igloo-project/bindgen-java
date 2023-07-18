@@ -28,6 +28,7 @@
 		<maven.site.version>3.9.1</maven.site.version>
 		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
 		<jsch.version>0.1.55</jsch.version>
+		<jakarta.version>2.1.1</jakarta.version>
 
 		<jdk.version>17</jdk.version>
 		<minimal.jdk.version>11</minimal.jdk.version>
@@ -46,6 +47,12 @@
 					<artifactId>slf4j-api</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+			<version>${jakarta.version}</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.iglooproject.components</groupId>
