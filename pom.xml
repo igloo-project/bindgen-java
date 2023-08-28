@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.iglooproject.components</groupId>
 	<artifactId>bindgen-java</artifactId>
-	<version>2.0.0</version>
+	<version>3.0.0</version>
 
 	<name>igloo java.* bindings</name>
 	<description>Pre-generated bindings for java classes</description>
@@ -10,8 +10,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<bindgen.version>5.0.0</bindgen.version>
-		<bindgen-bindings-java.version>2.0.0</bindgen-bindings-java.version>
+		<bindgen.version>6.0.0</bindgen.version>
+		<bindgen-bindings-java.version>3.0.0</bindgen-bindings-java.version>
 		<slf4j.version>1.7.32</slf4j.version>
 		<guava.version>30.1.1-jre</guava.version>
 
@@ -28,8 +28,9 @@
 		<maven.site.version>3.9.1</maven.site.version>
 		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
 		<jsch.version>0.1.55</jsch.version>
+		<jakarta.version>2.1.1</jakarta.version>
 
-		<jdk.version>11</jdk.version>
+		<jdk.version>17</jdk.version>
 		<minimal.jdk.version>11</minimal.jdk.version>
 		<minimal.maven.version>3.3</minimal.maven.version>
 	</properties>
@@ -46,6 +47,12 @@
 					<artifactId>slf4j-api</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+			<version>${jakarta.version}</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.iglooproject.components</groupId>
