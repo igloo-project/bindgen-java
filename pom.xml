@@ -10,28 +10,27 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<bindgen.version>6.0.0</bindgen.version>
-		<bindgen-bindings-java.version>3.0.0</bindgen-bindings-java.version>
-		<slf4j.version>1.7.32</slf4j.version>
-		<guava.version>30.1.1-jre</guava.version>
+		<bindgen.version>6.1.0-SNAPSHOT</bindgen.version>
+		<bindgen-bindings-java.version>3.1.0-SNAPSHOT</bindgen-bindings-java.version>
+		<slf4j.version>2.0.19</slf4j.version>
+		<guava.version>33.7.1-jre</guava.version>
 
-		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
-		<maven-jgitflow-plugin.version>1.0-m5.1</maven-jgitflow-plugin.version>
-		<maven.deploy.version>3.0.0-M1</maven.deploy.version>
-		<maven.source.version>3.2.1</maven.source.version>
-		<maven.javadoc.version>3.3.0</maven.javadoc.version>
-		<maven.clean.version>3.1.0</maven.clean.version>
-		<maven.install.version>3.0.0-M1</maven.install.version>
-		<maven.jar.version>3.2.0</maven.jar.version>
-		<maven.resources.version>3.2.0</maven.resources.version>
-		<maven.site.version>3.9.1</maven.site.version>
-		<maven.surefire.version>3.0.0-M5</maven.surefire.version>
-		<jsch.version>0.1.55</jsch.version>
-		<jakarta.version>2.1.1</jakarta.version>
+		<maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
+		<maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
+		<maven.gitflow-maven-plugin.version>1.21.0</maven.gitflow-maven-plugin.version>
+		<maven.deploy.version>3.2.0</maven.deploy.version>
+		<maven.source.version>3.4.0</maven.source.version>
+		<maven.javadoc.version>3.12.0</maven.javadoc.version>
+		<maven.clean.version>3.5.0</maven.clean.version>
+		<maven.install.version>3.2.0</maven.install.version>
+		<maven.jar.version>3.5.1</maven.jar.version>
+		<maven.resources.version>3.5.0</maven.resources.version>
+		<maven.site.version>3.22.0</maven.site.version>
+		<maven.surefire.version>3.6.0</maven.surefire.version>
+		<jakarta.version>3.0.0</jakarta.version>
 
-		<jdk.version>17</jdk.version>
-		<minimal.jdk.version>11</minimal.jdk.version>
+		<jdk.version>25</jdk.version>
+		<minimal.jdk.version>25</minimal.jdk.version>
 		<minimal.maven.version>3.3</minimal.maven.version>
 	</properties>
 
@@ -82,8 +81,20 @@
 				<artifactId>maven-enforcer-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>external.atlassian.jgitflow</groupId>
-				<artifactId>jgitflow-maven-plugin</artifactId>
+				<groupId>com.amashchenko.maven.plugin</groupId>
+				<artifactId>gitflow-maven-plugin</artifactId>
+				<version>${maven.gitflow-maven-plugin.version}</version>
+				<configuration>
+					<gitFlowConfig>
+						<productionBranch>master</productionBranch>
+						<developmentBranch>dev</developmentBranch>
+						<featureBranchPrefix>ft-</featureBranchPrefix>
+						<releaseBranchPrefix>rl-</releaseBranchPrefix>
+						<hotfixBranchPrefix>hf-</hotfixBranchPrefix>
+						<versionTagPrefix>v</versionTagPrefix>
+						<origin>origin</origin>
+					</gitFlowConfig>
+				</configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -148,6 +159,11 @@
 								<artifactId>bindgen</artifactId>
 								<version>${bindgen.version}</version>
 							</path>
+							<path>
+								<groupId>jakarta.annotation</groupId>
+								<artifactId>jakarta.annotation-api</artifactId>
+								<version>${jakarta.version}</version>
+							</path>
 						</annotationProcessorPaths>
 						<annotationProcessors>
 							<annotationProcessor>org.bindgen.processor.Processor</annotationProcessor>
@@ -166,7 +182,7 @@
 							</goals>
 							<configuration>
 								<rules>
-									<requiresUpperBounds />
+									<requireUpperBoundDeps />
 									<requireMavenVersion>
 										<version>[${minimal.maven.version},)</version>
 									</requireMavenVersion>
