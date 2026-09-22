@@ -1,9 +1,12 @@
 # Changelog
 
-## [Unreleased]
-### Added
+# 4.0 - 2026-09
 
-### Changed
+Java 25 migration
+
+# 3.0 - 2023-08
+
+Java 17 migration
 
 ## 2.0 - 2021-07
 
